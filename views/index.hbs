@@ -6,14 +6,11 @@
 var postOffset = 0;
 $(function() {
   // TODO: Redo this in pure JS
-  {{#if tag_slug}}
   fetchBlogPosts(postOffset, "{{tag_slug}}");
-  {{ else }}
-  fetchBlogPosts(postOffset);
-  {{/if}}
   {{#if syteSettings.integrations.disqus }}
   $('body').bind('blog-post-loaded', function() {
-    embedDisqus(true);
+    // embedDisqus(true);
+    console.log('loaded')
   });
   {{/if}}
 });

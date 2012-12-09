@@ -51,7 +51,7 @@ app.configure(function(){
       tumblr: {
         enabled: true,
         blogUrl: 'blog.tumblr.com',
-        oauthCusumerKey: "OAUTH_CUSUMER_KEY",
+        oauthCusumerKey: "TUMBLR_OAUTH_KEY",
       },
       github: true,
       instagram: true,
@@ -94,7 +94,13 @@ app.get('/', function(req, res) {
 app.get('/blog.json', function (req, res) {
   var blog_config = app.get('syte_settings').integrations.tumblr
   var blog = new Tumblr(blog_config.blogUrl, blog_config.oauthCusumerKey);
-  res.json({foo:'bar+1'})
+  console.log('query o', req.query.o)
+  blog.posts({limit: 20, offset:req.query.o}, function(error, response) {
+    if (error) {
+      throw new Error(error);
+    }
+    res.json({response:response})
+  });
 })
 
 http.createServer(app).listen(app.get('port'), function(){

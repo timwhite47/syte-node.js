@@ -1,61 +1,48 @@
 
 function fetchBlogPosts(offset, tag) {
   var blog_fetch_url = '/blog.json?o=' + offset;
-
+  console.log('offset', offset)
   if (tag)
       blog_fetch_url = '/tags/' + tag + '/?o=' + offset;
 
-  $.getJSON(blog_fetch_url, function(blog_posts) {
-      console.log(blog_posts)
-      require(["text!templates/blog-post-text.html",
-              "text!templates/blog-post-photo.html",
-              "text!templates/blog-post-link.html",
-              "text!templates/blog-post-video.html",
-              "text!templates/blog-post-audio.html",
-              "text!templates/blog-post-quote.html"],
+  $.getJSON(blog_fetch_url, function(blog) {
+       $('.loading').remove();
+       $.each(blog.response.posts, function(i, p) {
+          console.log(p)
+           p.formated_date = moment(p.date).format('MMMM DD, YYYY')
+           // TODO: Put disqus back in.
+           // if (disqus_integration_enabled)
+           //     p.disqus_enabled = true;
+           if (p.type == 'text')
+               var hbs_url = '/templates/blog-post-text.html'
+           else if (p.type == 'photo')
+               var hbs_url = '/templates/blog-post-photo.html'
+           else if (p.type == 'link')
+               var hbs_url = '/templates/blog-post-link.html'
+           else if (p.type == 'video')
+               var hbs_url = '/templates/blog-post-video.html'
+           else if (p.type == 'audio')
+               var hbs_url = '/templates/blog-post-audio.html'
+           else if (p.type == 'quote')
+               var hbs_url = '/templates/blog-post-quote.html'
 
-         function(text_post_template, photo_post_template,
-                  link_post_template, video_post_template,
-                  audio_post_template, quote_post_template) {
 
-            var text_template = Handlebars.compile(text_post_template);
-            var photo_template = Handlebars.compile(photo_post_template);
-            var link_template = Handlebars.compile(link_post_template);
-            var video_template = Handlebars.compile(video_post_template);
-            var audio_template = Handlebars.compile(audio_post_template);
-            var quote_template = Handlebars.compile(quote_post_template);
-
-            $('.loading').remove();
-            $.each(blog_posts.response.posts, function(i, p) {
-                console.log(i, p)
-                p.formated_date = moment(p.date).format('MMMM DD, YYYY')
-
-                if (disqus_integration_enabled)
-                    p.disqus_enabled = true;
-
-                if (p.type == 'text')
-                    $('#blog-posts').append(text_template(p));
-                else if (p.type == 'photo')
-                    $('#blog-posts').append(photo_template(p));
-                else if (p.type == 'link')
-                    $('#blog-posts').append(link_template(p));
-                else if (p.type == 'video')
-                    $('#blog-posts').append(video_template(p));
-                else if (p.type == 'audio')
-                    $('#blog-posts').append(audio_template(p));
-                else if (p.type == 'quote')
-                    $('#blog-posts').append(quote_template(p));
-
-            });
-
-            setupLinks();
-            adjustBlogHeaders();
-            prettyPrint();
-            setTimeout(setupBlogHeaderScroll, 1000);
-            adjustSelection('home');
-
-            $('body').trigger("blog-post-loaded");
+           $.get(hbs_url, function (hbs) {
+             // console.log(hbs)
+             temp = Handlebars.compile(hbs)
+             html = temp(p);
+             console.log(hbs_url)
+             $('#blog-posts').append(html)
+           });             
          });
+
+         setupLinks();
+         adjustBlogHeaders();
+         prettyPrint();
+         setTimeout(setupBlogHeaderScroll, 1000);
+         adjustSelection('home');
+
+         $('body').trigger("blog-post-loaded");
   });
 }
 
