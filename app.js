@@ -8,7 +8,8 @@ var express = require('express')
   , user = require('./routes/user')
   , http = require('http')
   , path = require('path')
-  , Tumblr = require('tumblr').Tumblr;
+  , Tumblr = require('tumblr').Tumblr
+  , twitter = require('twitter');
 
 var app = express();
 
@@ -43,7 +44,10 @@ app.configure(function(){
       bitbucket: "bitbucket_handle"
     }, 
     integrations: {
-      twitter: true,
+      twitter: {
+        enabled: true,
+        username: "tenacioustimi"
+      },
       disqus: {
         enabled: false,
         shortName: "DISQUS_SHORTNAME"
@@ -91,6 +95,7 @@ app.configure('development', function(){
 app.get('/', function(req, res) {
   res.render('index', { syteSettings: app.get('syte_settings') });
 });
+
 app.get('/blog.json', function (req, res) {
   var blog_config = app.get('syte_settings').integrations.tumblr
   var blog = new Tumblr(blog_config.blogUrl, blog_config.oauthCusumerKey);
@@ -100,6 +105,19 @@ app.get('/blog.json', function (req, res) {
       throw new Error(error);
     }
     res.json({response:response})
+  });
+});
+
+app.get('/tweets', function (req, res) {
+  var twitter_config = app.get('syte_settings').integrations.twitter
+  var twit = new twitter({
+      consumer_key: 'consumer_key',
+      consumer_secret: 'consumer_secret',
+      access_token_key: 'access_token_key',
+      access_token_secret: 'access_token_secret'
+  });
+  twit.get('/statuses/user_timeline.json', {screen_name:twitter_config.username}, function(data) {
+      res.json({data: data})
   });
 })
 

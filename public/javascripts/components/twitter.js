@@ -18,41 +18,43 @@ function setupTwitter(url, el) {
 
      var spinner = new Spinner(spin_opts).spin();
      $('#twitter-link').append(spinner.el);
+     $.get('/tweets', function (td) {
+      twitter_data = td.data
+       $.get('/templates/twitter-view.html', function (hbs) {
+        console.log(twitter_data);
+         if (twitter_data.error || twitter_data.length == 0) {
+             window.location = href;
+             return;
+         }
 
-     require(["json!/twitter/" + username, "text!templates/twitter-view.html"], 
-        function(twitter_data, twitter_view) {
-            if (twitter_data.error || twitter_data.length == 0) {
-                window.location = href;
-                return;
-            }
+         var template = Handlebars.compile(hbs);
 
-            var template = Handlebars.compile(twitter_view);
+         var tweets = [];
+         $.each(twitter_data, function(i, t) {
+           t.formated_date = moment(t.created_at).fromNow();
+           t.f_text = twitterLinkify(t.text);
+           tweets.push(t);
+         });
 
-            var tweets = [];
-            $.each(twitter_data, function(i, t) {
-              t.formated_date = moment(t.created_at).fromNow();
-              t.f_text = twitterLinkify(t.text);
-              tweets.push(t);
-            });
+         var user = twitter_data[0].user;
+         user.statuses_count = numberWithCommas(user.statuses_count);
+         user.friends_count = numberWithCommas(user.friends_count);
+         user.followers_count = numberWithCommas(user.followers_count);
+         user.f_description = twitterLinkify(user.description);
 
-            var user = twitter_data[0].user;
-            user.statuses_count = numberWithCommas(user.statuses_count);
-            user.friends_count = numberWithCommas(user.friends_count);
-            user.followers_count = numberWithCommas(user.followers_count);
-            user.f_description = twitterLinkify(user.description);
+         var template_data = {
+             "user": user,
+             "tweets": tweets
+         }
 
-            var template_data = {
-                "user": user,
-                "tweets": tweets
-            }
+         $(template(template_data)).modal().on('hidden', function () {
+             $(this).remove();
+             adjustSelection('home');
+         })
 
-            $(template(template_data)).modal().on('hidden', function () {
-                $(this).remove();
-                adjustSelection('home');
-            })
-
-            spinner.stop();
-        });
+         spinner.stop();
+       })
+     })
 
      return;
   }

@@ -10,6 +10,7 @@
     "hbs": "*",
     "less-middleware": "*",
     "everyauth" : "git://github.com/bnoguchi/everyauth.git#express3",
-    "tumblr" : "*"
+    "tumblr" : "*",
+    "twitter" : "*"
   }
 }

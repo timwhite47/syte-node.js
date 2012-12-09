@@ -57,7 +57,7 @@
   <h3><a href="/">{{syteSettings.hostName}}</a></h3>
 </div>
 <script type="text/javascript">
-var twitter_integration_enabled = {{syteSettings.integrations.twitter}},
+var twitter_integration_enabled = {{syteSettings.integrations.twitter.enabled}},
     github_integration_enabled = {{syteSettings.integrations.github}},
     // dribbble_integration_enabled = {{syteSettings.integrations.dribble}},
     instagram_integration_enabled = {{syteSettings.integrations.instagram}},
@@ -93,7 +93,7 @@ var disqus_shortname = '{{ syteSettings.integrations.disqus.shortName }}';
 <script src="/javascripts/components/blog-posts.js"></script>
 <script src="/javascripts/components/links.js"></script>
 
-{{#if syteSettings.integrations.twitter}}
+{{#if syteSettings.integrations.twitter.enabled}}
 <script src="/javascripts/components/twitter.js"></script>
 {{/if}}
 {{#if syteSettings.integrations.github}}
