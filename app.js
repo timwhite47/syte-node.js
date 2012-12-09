@@ -55,21 +55,36 @@ app.configure(function(){
       },  
       tumblr: {
         enabled: true,
-        blogUrl: 'tenacioustimi.tumblr.com',
-        oauthCusumerKey: "CJ9gY3DKKAV0xmSxnBZPzKrUygY1ESecxsU7uuGNKBsZpZ26Ya",
+        blogUrl: 'blog.tumblr.com',
+        oauthCusumerKey: "oauth_key",
       },
-      github: {enabled: true},
-      instagram: true,
-      last_fm: true,
-      foursquare: true,
+      github: {
+        enabled: true,
+        username: 'github_username'
+      },
+      instagram: {
+        enabled: false
+      },
+      last_fm: {
+        enabled: false
+      },
+      foursquare: {
+        enabled: false
+      },
       tentio: {
-        enabled: true, 
+        enabled: false, 
         entity_uri: "TENT_ENTITY_URI", 
         feed_url: "TENT_FEED_URL"
       },
-      dribble: false,
-      soundcloud: true,
-      bitbucket:true, 
+      dribble: {
+        enabled: false
+      },
+      soundcloud: {
+        enabled: false
+      },
+      bitbucket:{
+        enabled: false
+      }, 
       woopra: {
         enabled: false, 
         trackingDomain: "WOOPRA_TRACKING_DOMAIN",
@@ -77,7 +92,7 @@ app.configure(function(){
         includeQuery: false
       },
       googleAnalytics: {
-        enabled: true,
+        enabled: false,
         trackingId: "GOOGLE_ANALYTICS_TRACKING_ID" 
       }
     },
@@ -100,7 +115,6 @@ app.get('/', function(req, res) {
 app.get('/blog.json', function (req, res) {
   var blog_config = app.get('syte_settings').integrations.tumblr
   var blog = new Tumblr(blog_config.blogUrl, blog_config.oauthCusumerKey);
-  console.log('query o', req.query.o)
   blog.posts({limit: 20, offset:req.query.o}, function(error, response) {
     if (error) {
       throw new Error(error);
@@ -112,10 +126,10 @@ app.get('/blog.json', function (req, res) {
 app.get('/tweets', function (req, res) {
   var twitter_config = app.get('syte_settings').integrations.twitter
   var twit = new twitter({
-      consumer_key: 'HDEJiTYhOkNjC1S7JFE2g',
-      consumer_secret: 'R7Vf9gFgisyTjnsfIygflPPJEk8HcNFjJqFUE24BLs',
-      access_token_key: '17106780-iPiFkGkgbV3vqvZkTo1b2mzsxEIjvnNPvyfL6uBDk',
-      access_token_secret: 'cOnO72ArXnrobVtYplndvzllkMlcA6h89a38BQTA'
+      consumer_key: 'consumer_key',
+      consumer_secret: 'consumer_secret',
+      access_token_key: 'access_token_key',
+      access_token_secret: 'access_token_secret'
   });
   twit.get('/statuses/user_timeline.json', {screen_name:twitter_config.username}, function(data) {
       res.json({data: data})
@@ -123,19 +137,13 @@ app.get('/tweets', function (req, res) {
 })
 
 app.get('/github.json', function (req, res) {
-  GitHubApi = require("github")
-  var github = new GitHubApi({
-      version: "3.0.0"
-  });
+  var github_config = app.get('syte_settings').integrations.github
+  var github = new GitHubApi({version: "3.0.0"});
   git_data = {}
-  git_params = {
-      user: "timwhite47"
-  }
+  git_params = {user: github_config.username }
   github.user.getFrom(git_params, function(err, user) {
-      console.log(user);
       git_data.user = user;
       github.repos.getFromUser(git_params, function (err, repos) {
-        console.log(repos);
         git_data.repos = repos;
         res.json(git_data);
       })

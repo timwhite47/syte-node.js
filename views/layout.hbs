@@ -40,31 +40,31 @@
       <li><a href="http://github.com/{{syteSettings.usernames.github}}" id="github-link">Github</a></li>
       {{/if}}
       
-      {{#if syteSettings.integrations.dribble}}
+      {{#if syteSettings.integrations.dribble.enabled}}
       <li><a href="http://dribbble.com/{{syteSettings.usernames.dribble}}" id="dribbble-link">Dribbble</a></li>
       {{/if}}
       
-      {{#if syteSettings.integrations.instagram}}
+      {{#if syteSettings.integrations.instagram.enabled}}
       <li><a href="http://instagr.am/p/{{syteSettings.usernames.instagram}}" id="instagram-link">Instagram</a></li>
       {{/if}}
       
-      {{#if syteSettings.integrations.last_fm}}
+      {{#if syteSettings.integrations.last_fm.enabled}}
       <li><a href="http://lastfm.com/user/{{syteSettings.usernames.last_fm}}" id="lastfm-link">Last.fm</a></li>
       {{/if}}
       
-      {{#if syteSettings.integrations.foursquare}}
+      {{#if syteSettings.integrations.foursquare.enabled}}
       <li><a href="https://foursquare.com/user/{{syteSettings.usernames.foursquare}}" id="foursquare-link">Foursquare</a></li>
       {{/if}}
       
-      {{#if syteSettings.integrations.tentio.enabled}}
+      {{#if syteSettings.integrations.tentio.enabled.enabled}}
       <li><a href="{{syteSettings.usernames.tent_io_url}}" id="tent-link">Tent.io</a></li>
       {{/if}}
 
-      {{#if syteSettings.integrations.soundcloud}}
+      {{#if syteSettings.integrations.soundcloud.enabled}}
       <li><a href="http://soundcloud.com/{{syteSettings.usernames.soundcloud}}" id="soundcloud-link">Soundcloud</a></li>
       {{/if}}
 
-      {{#if syteSettings.integrations.bitbucket}}
+      {{#if syteSettings.integrations.bitbucket.enabled}}
       <li><a href="http://bitbucket.org/{{syteSettings.usernames.bitbucket}}" id="bitbucket-link">Bitbucket</a></li>
       {{/if}}
       
@@ -87,16 +87,48 @@
   <h3><a href="/">{{syteSettings.hostName}}</a></h3>
 </div>
 <script type="text/javascript">
-var twitter_integration_enabled = {{syteSettings.integrations.twitter.enabled}},
-    github_integration_enabled = {{syteSettings.integrations.github.enabled}},
-    // dribbble_integration_enabled = {{syteSettings.integrations.dribble}},
-    instagram_integration_enabled = {{syteSettings.integrations.instagram}},
-    // lastfm_integration_enabled = {{syteSettings.integrations.lastfm}},
-    // disqus_integration_enabled = {{syteSettings.integrations.disqus.enabled}},
-    soundcloud_integration_enabled = {{syteSettings.integrations.soundcloud}},
-    bitbucket_integration_enabled = {{syteSettings.integrations.bitbucket}},
-    foursquare_integration_enabled = {{syteSettings.integrations.foursquare}},
-    tent_integration_enabled = {{syteSettings.integrations.tentio.enabled}};
+  {{#if syteSettings.integrations.twitter.enabled}}
+    var twitter_integration_enabled = {{syteSettings.integrations.twitter.enabled}} 
+  {{/if}}
+
+    {{#if syteSettings.integrations.github.enabled}}
+      var github_integration_enabled = {{syteSettings.integrations.github.enabled}};
+    {{/if}}
+
+    
+    {{#if syteSettings.integrations.dribble.enabled}}
+    var dribbble_integration_enabled = {{syteSettings.integrations.dribble.enabled}};
+    {{/if}}
+
+
+    {{#if syteSettings.integrations.instagram.enabled}}
+    var instagram_integration_enabled = {{syteSettings.integrations.instagram.enabled}};
+    {{/if}}
+
+    {{#if syteSettings.integrations.lastfm.enabled}}
+    var lastfm_integration_enabled = {{syteSettings.integrations.lastfm}};
+    {{/if}}
+
+    {{#if syteSettings.integrations.disqus.enabled}}
+    var disqus_integration_enabled = {{syteSettings.integrations.disqus.enabled}};
+    {{/if}}
+
+    {{#if syteSettings.integrations.soundcloud.enabled}}
+    var soundcloud_integration_enabled = {{syteSettings.integrations.soundcloud.enabled}};
+    {{/if}}
+
+    {{#if syteSettings.integrations.bitbucket.enabled}}
+    var bitbucket_integration_enabled = {{syteSettings.integrations.bitbucket.enabled}};
+    {{/if}}
+
+    {{#if syteSettings.integrations.foursquare.enabled}}
+    var foursquare_integration_enabled = {{syteSettings.integrations.foursquare.enabled}};
+    {{/if}}
+
+    {{#if syteSettings.integrations.tentio.enabled}}
+    var tent_integration_enabled = {{syteSettings.integrations.tentio.enabled}};
+    {{/if}}
+
 
 
 {{# if syteSettings.integrations.disqus.enabled}}
