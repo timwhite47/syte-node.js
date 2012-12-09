@@ -54,8 +54,8 @@ app.configure(function(){
       },  
       tumblr: {
         enabled: true,
-        blogUrl: 'blog.tumblr.com',
-        oauthCusumerKey: "TUMBLR_OAUTH_KEY",
+        blogUrl: 'tenacioustimi.tumblr.com',
+        oauthCusumerKey: "CJ9gY3DKKAV0xmSxnBZPzKrUygY1ESecxsU7uuGNKBsZpZ26Ya",
       },
       github: true,
       instagram: true,
@@ -111,10 +111,10 @@ app.get('/blog.json', function (req, res) {
 app.get('/tweets', function (req, res) {
   var twitter_config = app.get('syte_settings').integrations.twitter
   var twit = new twitter({
-      consumer_key: 'consumer_key',
-      consumer_secret: 'consumer_secret',
-      access_token_key: 'access_token_key',
-      access_token_secret: 'access_token_secret'
+      consumer_key: 'HDEJiTYhOkNjC1S7JFE2g',
+      consumer_secret: 'R7Vf9gFgisyTjnsfIygflPPJEk8HcNFjJqFUE24BLs',
+      access_token_key: '17106780-iPiFkGkgbV3vqvZkTo1b2mzsxEIjvnNPvyfL6uBDk',
+      access_token_secret: 'cOnO72ArXnrobVtYplndvzllkMlcA6h89a38BQTA'
   });
   twit.get('/statuses/user_timeline.json', {screen_name:twitter_config.username}, function(data) {
       res.json({data: data})
