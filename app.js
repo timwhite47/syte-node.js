@@ -9,7 +9,8 @@ var express = require('express')
   , http = require('http')
   , path = require('path')
   , Tumblr = require('tumblr').Tumblr
-  , twitter = require('twitter');
+  , Twitter = require('twitter')
+  , GitHubApi = require("github");
 
 var app = express();
 
@@ -46,7 +47,7 @@ app.configure(function(){
     integrations: {
       twitter: {
         enabled: true,
-        username: "tenacioustimi"
+        username: "twitter_handle"
       },
       disqus: {
         enabled: false,
@@ -57,7 +58,7 @@ app.configure(function(){
         blogUrl: 'blog.tumblr.com',
         oauthCusumerKey: "TUMBLR_OAUTH_KEY",
       },
-      github: true,
+      github: {enabled: true},
       instagram: true,
       last_fm: true,
       foursquare: true,
@@ -110,7 +111,7 @@ app.get('/blog.json', function (req, res) {
 
 app.get('/tweets', function (req, res) {
   var twitter_config = app.get('syte_settings').integrations.twitter
-  var twit = new twitter({
+  var twit = new Twitter({
       consumer_key: 'consumer_key',
       consumer_secret: 'consumer_secret',
       access_token_key: 'access_token_key',
@@ -118,6 +119,18 @@ app.get('/tweets', function (req, res) {
   });
   twit.get('/statuses/user_timeline.json', {screen_name:twitter_config.username}, function(data) {
       res.json({data: data})
+  });
+})
+
+app.get('/github.json', function (req, res) {
+  var github = new GitHubApi({
+      version: "3.0.0"
+  });
+
+  github.user.getFollowingFromUser({
+      user: "mikedeboer"
+  }, function(err, res) {
+      console.log(JSON.stringify(res));
   });
 })
 

@@ -19,6 +19,13 @@ function setupGithub(url, el) {
      var spinner = new Spinner(spin_opts).spin();
      $('#github-link').append(spinner.el);
 
+     $.get('/github.json', function (data) {
+       $.get('/templates/github-profile.html', function (hbs) {
+         var template = Handlebars.compile(hbs);
+
+       })
+     })
+
      require(["json!/github/" + username, "text!templates/github-profile.html"],
         function(github_data, github_view) {
             if (github_data.error || github_data.length == 0) {
@@ -29,7 +36,7 @@ function setupGithub(url, el) {
             var template = Handlebars.compile(github_view);
             github_data.user.following = numberWithCommas(github_data.user.following)
             github_data.user.followers = numberWithCommas(github_data.user.followers)
-
+            
             $(template(github_data)).modal().on('hidden', function () {
                 $(this).remove();
                 adjustSelection('home');
