@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="description" content="{{syteSettings.seo.description}}" />
+  <meta name="keywords" content="{{syteSettings.seo.keywords}}" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <title>{{syteSettings.syteTitle}}</title>
+  <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+  <!-- TODO GET FROM EXPRESS SETTINGS -->
+    {{#if syteSettings.rss.enabled}}
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="{{syteSettings.rss.feedUrl}}" />
+    {{/if}}
+    <link rel="stylesheet/less" type="text/css" href="/stylesheets/styles.less">
+    <script src="/stylesheets/less-1.1.5.min.js" type="text/javascript"></script>
+    <!-- <link rel="stylesheet" href="/stylesheets/styles-{{ COMPRESS_REVISION_NUMBER }}.min.css" type="text/css" media="screen, projection"> -->
+  <!-- END TODO -->
+
+</head>
+<body>
+<header class="main-header">
+  <hgroup>
+    <div class="picture">
+      <a href="/" rel="home"></a>
+    </div>
+    <h1>{{syteSettings.name}}</h1>
+    <h2>{{{syteSettings.sidebarBlurb}}}</h2>
+  </hgroup>
+  <nav>
+    <ul class="main-nav">
+      <li><a href="/" id="home-link">Home</a></li>
+      <li><a href="http://twitter.com/#!/{{syteSettings.usernames.twitter}}" id="twitter-link">Twitter</a></li>
+      <li><a href="http://github.com/{{syteSettings.usernames.github}}" id="github-link">Github</a></li>
+      <li><a href="http://dribbble.com/{{syteSettings.usernames.dribble}}" id="dribbble-link">Dribbble</a></li>
+      <li><a href="http://instagr.am/p/{{syteSettings.usernames.instagram}}" id="instagram-link">Instagram</a></li>
+      <li><a href="http://lastfm.com/user/{{syteSettings.usernames.last_fm}}" id="lastfm-link">Last.fm</a></li>
+      <li><a href="https://foursquare.com/user/{{syteSettings.usernames.foursquare}}" id="foursquare-link">Foursquare</a></li>
+      <li><a href="{{syteSettings.usernames.tent_io_url}}" id="tent-link">Tent.io</a></li>
+      <li><a href="http://soundcloud.com/{{syteSettings.usernames.soundcloud}}" id="soundcloud-link">Soundcloud</a></li>
+      <li><a href="http://bitbucket.org/{{syteSettings.usernames.bitbucket}}" id="bitbucket-link">Bitbucket</a></li>
+      <li><a href="mailto:{{syteSettings.email}}?subject=Hello" id="contact-link">Contact</a></li>
+    </ul>
+  </nav>
+  <a href="https://github.com/timwhite47/syte" class="fork-me">Fork me on Github</a>
+</header>
+
+{{{body}}}
+
+<div class="mobile-nav">
+  <span class="nav-btn" id="mobile-nav-btn">
+    <span class="nav-btn-bar"></span>
+    <span class="nav-btn-bar"></span>
+    <span class="nav-btn-bar"></span>
+  </span>
+  <h3><a href="/">{{syteSettings.hostName}}</a></h3>
+</div>
+<script type="text/javascript">
+var twitter_integration_enabled = {{syteSettings.integrations.twitter}},
+    github_integration_enabled = {{syteSettings.integrations.github}},
+    // dribbble_integration_enabled = {{syteSettings.integrations.dribble}},
+    instagram_integration_enabled = {{syteSettings.integrations.instagram}},
+    // lastfm_integration_enabled = {{syteSettings.integrations.lastfm}},
+    // disqus_integration_enabled = {{syteSettings.integrations.disqus.enabled}},
+    soundcloud_integration_enabled = {{syteSettings.integrations.soundcloud}},
+    bitbucket_integration_enabled = {{syteSettings.integrations.bitbucket}},
+    foursquare_integration_enabled = {{syteSettings.integrations.foursquare}},
+    tent_integration_enabled = {{syteSettings.integrations.tentio.enabled}};
+
+
+{{# if syteSettings.integrations.disqus.enabled}}
+var disqus_shortname = '{{ syteSettings.integrations.disqus.shortName }}';
+{{/if}}
+</script>
+
+{{#if syteSettings.integrations.tentio.enabled}}
+<script type="text/javascript">
+  var tent_entity_uri = '{{ syteSettings.integrations.tentio.entity_uri }}';
+  var tent_feed_url = '{{ syteSettings.integrations.tentio.feed_url }}';
+</script>
+{{/if}}
+
+<script src="/javascripts/libs/jquery.url.js"></script>
+<script src="/javascripts/libs/require.js"></script>
+<script src="/javascripts/libs/handlebars.js"></script>
+<script src="/javascripts/libs/moment.min.js"></script>
+<script src="/javascripts/libs/bootstrap-modal.js"></script>
+<script src="/javascripts/libs/spin.min.js"></script>
+<script src="/javascripts/libs/prettify.js"></script>
+<script src="/javascripts/components/base.js"></script>
+<script src="/javascripts/components/mobile.js"></script>
+<script src="/javascripts/components/blog-posts.js"></script>
+<script src="/javascripts/components/links.js"></script>
+
+{{#if syteSettings.integrations.twitter}}
+<script src="/javascripts/components/twitter.js"></script>
+{{/if}}
+{{#if syteSettings.integrations.github}}
+<script src="/javascripts/components/github.js"></script>
+{{/if}}
+{{#if syteSettings.integrations.dribble}}
+<script src="/javascripts/components/dribbble.js"></script>
+{{/if}}
+{{#if syteSettings.integrations.instagram}}
+<script src="/javascripts/components/instagram.js"></script>
+{{/if}}
+{{#if syteSettings.integrations.lastfm}}
+<script src="/javascripts/components/lastfm.js"></script>
+{{/if}}
+{{#if syteSettings.integrations.bitbucket}}
+<script src="/javascripts/components/bitbucket.js"></script>
+{{/if}}
+{{#if syteSettings.integrations.disqus}}
+<script src="/javascripts/components/disqus.js"></script>
+{{/if}}
+{{#if syteSettings.integrations.soundcloud}}
+<script src="/javascripts/components/soundcloud.js"></script>
+{{/if}}
+{{#if syteSettings.integrations.foursquare}}
+<script src="/javascripts/components/foursquare.js"></script>
+{{/if}}
+
+{{#if syteSettings.integrations.tentio.enabled}}
+<script src="/javascripts/components/tent.js"></script>
+{{/if}}
+
+<!-- FOR PRODUCTION <script src="/javascripts/min/scripts-{{ COMPRESS_REVISION_NUMBER }}.min.js"></script> -->
+
+
+<script type="text/javascript">
+
+{{#if syteSettings.integrations.woopra.enabled}}
+function woopraReady(tracker) {
+    tracker.setDomain("{{syteSettings.integrations.woopra.trackingDomain}}");
+    tracker.setIdleTimeout({{syteSettings.integrations.woopra.idleTimeout}});
+    {{#if syteSettings.integrations.woopra.includeQuery}}
+    tracker.trackPageview({type:'pageview',url:window.location.pathname+window.location.search,title:document.title});
+    {{else}}
+    tracker.track();
+    {{/if}}
+
+    return false;
+}
+(function() {
+    var wsc = document.createElement('script');
+    wsc.src = document.location.protocol+'//static.woopra.com/js/woopra.js';
+    wsc.type = 'text/javascript';
+    wsc.async = true;
+    var ssc = document.getElementsByTagName('script')[0];
+    ssc.parentNode.insertBefore(wsc, ssc);
+})();
+{{/if}}
+
+{{#if syteSettings.integrations.googleAnalytics.enabled}}
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', '{{syteSettings.integrations.googleAnalytics.trackingId}}']);
+_gaq.push(['_trackPageview']);
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+{{/if}}
+</script>
+</body>
+</html>
