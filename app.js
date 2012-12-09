@@ -9,7 +9,8 @@ var express = require('express')
   , http = require('http')
   , path = require('path')
   , Tumblr = require('tumblr').Tumblr
-  , twitter = require('twitter');
+  , Twitter = require('twitter')
+  , GitHubApi = require("github");
 
 var app = express();
 
@@ -46,7 +47,7 @@ app.configure(function(){
     integrations: {
       twitter: {
         enabled: true,
-        username: "tenacioustimi"
+        username: "twitter_handle"
       },
       disqus: {
         enabled: false,
@@ -57,7 +58,7 @@ app.configure(function(){
         blogUrl: 'tenacioustimi.tumblr.com',
         oauthCusumerKey: "CJ9gY3DKKAV0xmSxnBZPzKrUygY1ESecxsU7uuGNKBsZpZ26Ya",
       },
-      github: true,
+      github: {enabled: true},
       instagram: true,
       last_fm: true,
       foursquare: true,
@@ -118,6 +119,26 @@ app.get('/tweets', function (req, res) {
   });
   twit.get('/statuses/user_timeline.json', {screen_name:twitter_config.username}, function(data) {
       res.json({data: data})
+  });
+})
+
+app.get('/github.json', function (req, res) {
+  GitHubApi = require("github")
+  var github = new GitHubApi({
+      version: "3.0.0"
+  });
+  git_data = {}
+  git_params = {
+      user: "timwhite47"
+  }
+  github.user.getFrom(git_params, function(err, user) {
+      console.log(user);
+      git_data.user = user;
+      github.repos.getFromUser(git_params, function (err, repos) {
+        console.log(repos);
+        git_data.repos = repos;
+        res.json(git_data);
+      })
   });
 })
 
