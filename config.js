@@ -62,7 +62,10 @@ config.integrations.instagram = {
 // Foursquare - TODO
 config.integrations.foursquare = {
   enabled: false,
-  username: "foursquare_handle"
+  username: "foursquare_handle",
+  uid: '8760932',
+  client_id: "X0JLKJTNGHEN4BVFDOYPBQEJMQYVWZPCSBJSZJ3ZE14IAVLO", 
+  client_secret: "EPPIR0ITAHPZUDCRFFCDEK1XAVNEUQW1LJ0ZBH5BMAHIDRR5"
 };
 
 // Last FM - TODO

@@ -9,9 +9,11 @@
     "express": "3.0.0rc5",
     "hbs": "*",
     "less-middleware": "*",
-    "everyauth" : "git://github.com/bnoguchi/everyauth.git#express3",
+    "connect" : "*",
+    "everyauth": "0.2.34",
     "tumblr" : "*",
     "twitter" : "*",
-    "github" : "*"
+    "github" : "*",
+    "4sq" : "*"
   }
 }
