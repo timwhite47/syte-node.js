@@ -15,6 +15,7 @@ var allComponents = [
 function setupLinks() {
 
   $('a').click(function(e) {
+    console.log('link clicked', e)
       if (e.which == 2)
           return;
       e.preventDefault();
@@ -68,6 +69,7 @@ function setupLinks() {
       else {
          window.location = this.href;
       }
+      return false;
   });
 }
 

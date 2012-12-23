@@ -18,7 +18,7 @@ function setupTwitter(url, el) {
 
      var spinner = new Spinner(spin_opts).spin();
      $('#twitter-link').append(spinner.el);
-     $.get('/tweets', function (td) {
+     $.get('/tweets.json', function (td) {
       twitter_data = td.data
        $.get('/templates/twitter-view.html', function (hbs) {
         console.log(twitter_data);
