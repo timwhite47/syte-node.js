@@ -98,35 +98,51 @@
     
     {{#if syteSettings.integrations.dribble.enabled}}
     var dribbble_integration_enabled = {{syteSettings.integrations.dribble.enabled}};
+    {{else}}
+    var dribbble_integration_enabled = false;
     {{/if}}
 
 
     {{#if syteSettings.integrations.instagram.enabled}}
     var instagram_integration_enabled = {{syteSettings.integrations.instagram.enabled}};
+    {{else}}
+    var instagram_integration_enabled = false;
     {{/if}}
 
     {{#if syteSettings.integrations.lastfm.enabled}}
     var lastfm_integration_enabled = {{syteSettings.integrations.lastfm}};
+    {{else}}
+    var lastfm_integration_enabled = false;
     {{/if}}
 
     {{#if syteSettings.integrations.disqus.enabled}}
     var disqus_integration_enabled = {{syteSettings.integrations.disqus.enabled}};
+    {{else}}
+    var disqus_integration_enabled = false;
     {{/if}}
 
     {{#if syteSettings.integrations.soundcloud.enabled}}
     var soundcloud_integration_enabled = {{syteSettings.integrations.soundcloud.enabled}};
+    {{else}}
+    var soundcloud_integration_enabled = false;
     {{/if}}
 
     {{#if syteSettings.integrations.bitbucket.enabled}}
     var bitbucket_integration_enabled = {{syteSettings.integrations.bitbucket.enabled}};
+    {{else}}
+    var bitbucket_integration_enabled = false;
     {{/if}}
 
     {{#if syteSettings.integrations.foursquare.enabled}}
     var foursquare_integration_enabled = {{syteSettings.integrations.foursquare.enabled}};
+    {{else}}
+    var foursquare_integration_enabled = false;
     {{/if}}
 
     {{#if syteSettings.integrations.tentio.enabled}}
     var tent_integration_enabled = {{syteSettings.integrations.tentio.enabled}};
+    {{else}}
+    var tent_integration_enabled = false;
     {{/if}}
 
 

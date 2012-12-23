@@ -35,18 +35,16 @@ module.exports = function (app) {
 
 	app.get('/foursquare.json', function (req, res) {
 		console.log('current_user = ', req.user)
-		
 		var foursquare_config = app.get('syte_settings').integrations.foursquare
 		
 		if (foursquare_config.accessToken) {
 			var foursquare = require('4sq');
 			var fsq = new foursquare({token: foursquare_config.accessToken});	
-			fsq.checkins('self', {}, function(error, data) {
-			  if (error) {
-			    throw new Error(error);
-			  }
-
-			  res.json(data);
+			fsq.checkins('self', {}, function(error, checkin_data) {
+			  fsq.user('self', {}, function (error, user_data) {
+			  	console.log('checkins', checkin_data, user_data)
+			  	res.json({checkins: checkin_data.checkins, user: user_data.user, });
+			  })
 			});
 		} else {
 			res.json({});

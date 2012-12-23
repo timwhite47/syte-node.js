@@ -10,13 +10,12 @@ function setupFoursquare(el) {
   var spinner = new Spinner(spin_opts).spin();
   $('#foursquare-link').append(spinner.el);
 
-  require(["json!/foursquare/",
-          "text!templates/foursquare-profile.html"],
-     function(foursquare_data, foursquare_profile) {
-
+  $.getJSON('/foursquare.json', function (foursquare_data) {
+    $.get('/templates/foursquare-profile.html', function (foursquare_profile) {
+        console.log('foursquare_data', foursquare_profile)
         if (!foursquare_data.checkins){
-            window.location = href;
-            return;
+            // window.location = href;
+            // return;
         }
 
         var template = Handlebars.compile(foursquare_profile);
@@ -51,5 +50,6 @@ function setupFoursquare(el) {
         spinner.stop();
 
         return;
-     });
+     })
+  })
 }

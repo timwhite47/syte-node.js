@@ -7,34 +7,36 @@ function fetchBlogPosts(offset, tag) {
 
   $.getJSON(blog_fetch_url, function(blog) {
        $('.loading').remove();
-       $.each(blog.response.posts, function(i, p) {
-          console.log(p)
-           p.formated_date = moment(p.date).format('MMMM DD, YYYY')
-           // TODO: Put disqus back in.
-           // if (disqus_integration_enabled)
-           //     p.disqus_enabled = true;
-           if (p.type == 'text')
-               var hbs_url = '/templates/blog-post-text.html'
-           else if (p.type == 'photo')
-               var hbs_url = '/templates/blog-post-photo.html'
-           else if (p.type == 'link')
-               var hbs_url = '/templates/blog-post-link.html'
-           else if (p.type == 'video')
-               var hbs_url = '/templates/blog-post-video.html'
-           else if (p.type == 'audio')
-               var hbs_url = '/templates/blog-post-audio.html'
-           else if (p.type == 'quote')
-               var hbs_url = '/templates/blog-post-quote.html'
+         if (blog.response.posts) {
+          $.each(blog.response.posts, function(i, p) {
+             console.log(p)
+              p.formated_date = moment(p.date).format('MMMM DD, YYYY')
+              // TODO: Put disqus back in.
+              // if (disqus_integration_enabled)
+              //     p.disqus_enabled = true;
+              if (p.type == 'text')
+                  var hbs_url = '/templates/blog-post-text.html'
+              else if (p.type == 'photo')
+                  var hbs_url = '/templates/blog-post-photo.html'
+              else if (p.type == 'link')
+                  var hbs_url = '/templates/blog-post-link.html'
+              else if (p.type == 'video')
+                  var hbs_url = '/templates/blog-post-video.html'
+              else if (p.type == 'audio')
+                  var hbs_url = '/templates/blog-post-audio.html'
+              else if (p.type == 'quote')
+                  var hbs_url = '/templates/blog-post-quote.html'
 
 
-           $.get(hbs_url, function (hbs) {
-             // console.log(hbs)
-             temp = Handlebars.compile(hbs)
-             html = temp(p);
-             console.log(hbs_url)
-             $('#blog-posts').append(html)
-           });             
-         });
+              $.get(hbs_url, function (hbs) {
+                // console.log(hbs)
+                temp = Handlebars.compile(hbs)
+                html = temp(p);
+                console.log(hbs_url)
+                $('#blog-posts').append(html)
+              });             
+            });
+         };
 
          setupLinks();
          adjustBlogHeaders();

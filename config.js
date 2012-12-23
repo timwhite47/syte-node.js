@@ -61,7 +61,7 @@ config.integrations.instagram = {
 
 // Foursquare - TODO
 config.integrations.foursquare = {
-  enabled: false,
+  enabled: true,
   username: "foursquare_handle",
   uid: '8760932',
   client_id: "X0JLKJTNGHEN4BVFDOYPBQEJMQYVWZPCSBJSZJ3ZE14IAVLO", 
