@@ -15,7 +15,7 @@ module.exports = function (app) {
 
 	app.get('/tweets.json', function (req, res) {
 	  var twitter_config = app.get('syte_settings').integrations.twitter
-	  var twit = new twitter(twitter_config.oauth);
+	  var twit = new Twitter(twitter_config.oauth);
 
 	  twit.get('/statuses/user_timeline.json', {screen_name:twitter_config.username}, function(data) {
 	      res.json({data: data})
@@ -27,7 +27,7 @@ module.exports = function (app) {
 	  var github = new GitHubApi({version: "3.0.0"});
 	  
 	  github.user.getFrom({user: github_config.username }, function(err, user) {
-	      github.repos.getFromUser(git_params, function (err, repos) {
+	      github.repos.getFromUser({user: github_config.username }, function (err, repos) {
 	        res.json({user: user, repos: repos});
 	      });
 	  });

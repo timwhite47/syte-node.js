@@ -33,39 +33,39 @@
       <li><a href="/" id="home-link">Home</a></li>
       
       {{#if syteSettings.integrations.twitter.enabled}}
-      <li><a href="http://twitter.com/#!/{{syteSettings.usernames.twitter}}" id="twitter-link">Twitter</a></li>
+      <li><a href="http://twitter.com/#!/{{syteSettings.integrations.twitter.username}}" id="twitter-link">Twitter</a></li>
       {{/if}}
       
       {{#if syteSettings.integrations.github.enabled}}
-      <li><a href="http://github.com/{{syteSettings.usernames.github}}" id="github-link">Github</a></li>
+      <li><a href="http://github.com/{{syteSettings.integrations.github.username}}" id="github-link">Github</a></li>
       {{/if}}
       
       {{#if syteSettings.integrations.dribble.enabled}}
-      <li><a href="http://dribbble.com/{{syteSettings.usernames.dribble}}" id="dribbble-link">Dribbble</a></li>
+      <li><a href="http://dribbble.com/{{syteSettings.integrations.dribble.username}}" id="dribbble-link">Dribbble</a></li>
       {{/if}}
       
       {{#if syteSettings.integrations.instagram.enabled}}
-      <li><a href="http://instagr.am/p/{{syteSettings.usernames.instagram}}" id="instagram-link">Instagram</a></li>
+      <li><a href="http://instagr.am/p/{{syteSettings.integrations.instagram.username}}" id="instagram-link">Instagram</a></li>
       {{/if}}
       
       {{#if syteSettings.integrations.last_fm.enabled}}
-      <li><a href="http://lastfm.com/user/{{syteSettings.usernames.last_fm}}" id="lastfm-link">Last.fm</a></li>
+      <li><a href="http://lastfm.com/user/{{syteSettings.integrations.last_fm.username}}" id="lastfm-link">Last.fm</a></li>
       {{/if}}
       
       {{#if syteSettings.integrations.foursquare.enabled}}
-      <li><a href="https://foursquare.com/user/{{syteSettings.usernames.foursquare}}" id="foursquare-link">Foursquare</a></li>
+      <li><a href="https://foursquare.com/user/{{syteSettings.integrations.foursquare.username}}" id="foursquare-link">Foursquare</a></li>
       {{/if}}
       
       {{#if syteSettings.integrations.tentio.enabled.enabled}}
-      <li><a href="{{syteSettings.usernames.tent_io_url}}" id="tent-link">Tent.io</a></li>
+      <li><a href="{{syteSettings.integrations.tent_io_url}}" id="tent-link">Tent.io</a></li>
       {{/if}}
 
       {{#if syteSettings.integrations.soundcloud.enabled}}
-      <li><a href="http://soundcloud.com/{{syteSettings.usernames.soundcloud}}" id="soundcloud-link">Soundcloud</a></li>
+      <li><a href="http://soundcloud.com/{{syteSettings.integrations.soundcloud.username}}" id="soundcloud-link">Soundcloud</a></li>
       {{/if}}
 
       {{#if syteSettings.integrations.bitbucket.enabled}}
-      <li><a href="http://bitbucket.org/{{syteSettings.usernames.bitbucket}}" id="bitbucket-link">Bitbucket</a></li>
+      <li><a href="http://bitbucket.org/{{syteSettings.integrations.bitbucket.username}}" id="bitbucket-link">Bitbucket</a></li>
       {{/if}}
       
       {{#if syteSettings.email}}

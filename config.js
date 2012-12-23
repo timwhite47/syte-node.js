@@ -15,7 +15,7 @@ config.hostName = "your-domain-name.com";
 // RSS
 config.rss = {
   enabled: false,
-  feedUrl: "RSS_FEED_URL"
+  feedUrl: "FOOBAR_RSS_FEED_URL"
 };
 
 
