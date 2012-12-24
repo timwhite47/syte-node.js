@@ -58,11 +58,13 @@ module.exports = function (app) {
 		var instagram_config = app.get('syte_settings').integrations.instagram
 		ig.use({ access_token: instagram_config.accessToken });
 		// ig.use({ client_id: instagram_config.client_id, client_secret: instagram_config.client_secret });
-
-		ig.user_media_recent(instagram_config.uid, {}, function(err, medias, pagination, limit) {
-			console.log(err, medias, pagination, limit);
-			res.json(medias);
+		ig.user(instagram_config.uid, function(err, user_result, limit) {
+			ig.user_media_recent(instagram_config.uid, {}, function(err, medias, pagination, limit) {
+				console.log(err, medias, pagination, limit);
+				res.json({media:medias, user: user_result});
+			});
 		});
+
 	})
 
 }

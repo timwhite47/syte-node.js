@@ -1,5 +1,6 @@
 
 function setupInstagram(el) {
+  console.log(el);
   var href = el.href;
 
   if($('#instagram-profile').length > 0) {
@@ -9,14 +10,13 @@ function setupInstagram(el) {
 
   var spinner = new Spinner(spin_opts).spin();
   $('#instagram-link').append(spinner.el);
-
-  require(["json!/instagram/",
-          "text!templates/instagram-view.html",
-          "text!templates/instagram-view-more.html"],
-     function(instagram_data, instagram_view, instagram_view_more) {
+  $.getJSON('/instagram.json', function  (instagram_data) {
+    $.get('/templates/instagram-view.html', function (instagram_view) {
+      $.get('/templates/instagram-view-more.html', function (instagram_view_more) {
+        console.log(instagram_data);
         if (instagram_data.media == 0){
-            window.location = href;
-            return;
+            // window.location = href;
+            // return;
         }
 
         var template = Handlebars.compile(instagram_view);
@@ -62,5 +62,8 @@ function setupInstagram(el) {
         })
 
         spinner.stop();
-     });
+      })
+    })
+  })
+
 }
