@@ -11,6 +11,7 @@
     "less-middleware": "*",
     "connect" : "*",
     "everyauth": "0.2.34",
+    "memory-cache": "*",
     "tumblr" : "*",
     "twitter" : "*",
     "github" : "*",
