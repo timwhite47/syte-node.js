@@ -35,7 +35,29 @@ everyauth.foursquare
     return c.config.integrations.foursquare.profile
   })
   .callbackPath('/auth/foursquare/callback')
-  .redirectPath('/')
+  .redirectPath
+
+  everyauth.instagram
+    .appId(c.config.integrations.instagram.client_id)
+    .appSecret(c.config.integrations.instagram.client_secret)
+    .getSession(function (argument) {
+      console.log(argument);
+      return {}
+    })
+    .findOrCreateUser( function (session, accessToken, accessTokenExtra, profile) {
+      if (c.config.integrations.instagram.uid == profile.id) {
+        c.config.integrations.instagram.accessToken = accessToken;
+        c.config.integrations.instagram.profile = profile;
+        console.log(accessToken, accessTokenExtra, profile);
+      };
+      setTimeout(function() {
+        console.log('new instagram auth', c.config.integrations.instagram)
+      }, 2000);
+
+      return c.config.integrations.instagram.profile
+    })
+    .scope('basic')
+    .redirectPath('/');
 
 everyauth.everymodule.findUserById( function (userId, callback) {
   // Something should go here....

@@ -1,6 +1,7 @@
 var Tumblr = require('tumblr').Tumblr
   , Twitter = require('twitter')
-  , GitHubApi = require("github");
+  , GitHubApi = require("github")
+  , ig = require('instagram-node').instagram({});
 
 module.exports = function (app) {
 	app.get('/blog.json', function (req, res) {
@@ -51,4 +52,17 @@ module.exports = function (app) {
 		}
 
 	})
+	app.get('/instagram.json', function (req, res) {
+		var instagram_config = app.get('syte_settings').integrations.instagram
+		ig.use({ access_token: instagram_config.accessToken });
+		// ig.use({ client_id: instagram_config.client_id, client_secret: instagram_config.client_secret });
+		ig.user(instagram_config.uid, function(err, user_result, limit) {
+			ig.user_media_recent(instagram_config.uid, {}, function(err, medias, pagination, limit) {
+				console.log(err, medias, pagination, limit);
+				res.json({media:medias, user: user_result});
+			});
+		});
+
+	})
+
 }
