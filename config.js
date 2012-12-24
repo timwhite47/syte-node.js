@@ -55,14 +55,17 @@ config.integrations.github = {
 
 // Instagram - TODO
 config.integrations.instagram = {
-  enabled: false,
-  username: 'instagram_username'
+  enabled: true,
+  username: 'tenacioustimi',
+  uid: '27657730',
+  client_id: "b67a71a81a754cc29aeb5ee716105b50", 
+  client_secret: "05713e446cd44c97a9467cfbb2757c28"
 }
 
-// Foursquare - TODO
+// Foursquare
 config.integrations.foursquare = {
-  enabled: false,
-  username: "foursquare_handle",
+  enabled: true,
+  username: "tenacioustimi",
   uid: '8760932',
   client_id: "X0JLKJTNGHEN4BVFDOYPBQEJMQYVWZPCSBJSZJ3ZE14IAVLO", 
   client_secret: "EPPIR0ITAHPZUDCRFFCDEK1XAVNEUQW1LJ0ZBH5BMAHIDRR5"
