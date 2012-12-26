@@ -4,18 +4,18 @@ config.seo = {};
 config.integrations = {};
 
 // Basic Info
-config.email = "your_email@somewhere.com";
-config.name =  "John Doe";
+config.email = "tim@tenacioustimi.com";
+config.name =  "Tim White";
 
 // Frontend Sidebar
 config.sidebarBlurb = "This is your syte!";
-config.syteTitle = 'Syte for Node JS';
-config.hostName = "your-domain-name.com";
+config.syteTitle = 'Welcome to my Syte!';
+config.hostName = "tenacioustimi.com";
 
 // RSS
 config.rss = {
   enabled: false,
-  feedUrl: "FOOBAR_RSS_FEED_URL"
+  feedUrl: "RSS_FEED_URL"
 };
 
 
@@ -24,12 +24,12 @@ config.rss = {
 // Twitter
 config.integrations.twitter = {
   enabled: true,
-  username: "twitter_handle",
+  username: "tenacioustimi",
   oauth: {
-    consumer_key: 'consumer_key',
-    consumer_secret: 'consumer_secret',
-    access_token_key: 'access_token_key',
-    access_token_secret: 'access_token_secret'
+    consumer_key: 'HDEJiTYhOkNjC1S7JFE2g',
+    consumer_secret: 'R7Vf9gFgisyTjnsfIygflPPJEk8HcNFjJqFUE24BLs',
+    access_token_key: '17106780-iPiFkGkgbV3vqvZkTo1b2mzsxEIjvnNPvyfL6uBDk',
+    access_token_secret: 'cOnO72ArXnrobVtYplndvzllkMlcA6h89a38BQTA'
   }
 };
 
@@ -42,15 +42,15 @@ config.integrations.disqus = {
 // Tumblr
 config.integrations.tumblr = {
   enabled: true,
-  username: 'tumblr_username',
-  blogUrl: 'blog.tumblr.com',
-  oauthCusumerKey: "oauth_key"
+  username: 'tenacioustimi',
+  blogUrl: 'tenacioustimi.tumblr.com',
+  oauthCusumerKey: "CJ9gY3DKKAV0xmSxnBZPzKrUygY1ESecxsU7uuGNKBsZpZ26Ya"
 };
 
 // Github
 config.integrations.github = {
   enabled: true,
-  username: 'github_username'
+  username: 'timwhite47'
 }
 
 // Instagram - TODO
@@ -111,7 +111,7 @@ config.analytics.googleAnalytics = {
   trackingId: "GOOGLE_ANALYTICS_TRACKING_ID" 
 }
 
-config.seo.description =  "This is a syte site in Node.js";
-config.seo.keywords = ['these', 'are', 'your', 'keywords'].join();
+config.seo.description =  "Tim White's place on the interwebs";
+config.seo.keywords = ['Tim', 'White', 'Bellingham', 'WA', 'Web Development', 'programming', 'ruby', 'node.js', 'hacker'].join();
 
 exports.config = config;

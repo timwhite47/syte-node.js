@@ -1,30 +1,29 @@
 jQuery -> 
 	class BlogView extends Backbone.View
 		initialize: (opts) ->
-			console.log opts
-			console.log(@model)
 			@model.fetch()
 		render: ->
-			# HB
+			@model.posts.models[0]
 
 	class BlogPostView extends Backbone.View
 		tagName: "article"
 		initialize:(opts) ->
-			console.log('fooobar')
 			_.bindAll @
 			@post = opts.model
-			$(@el).empty()
 			@render()
 
 		render: -> 
+			post = @post
 			json = @post.toJSON()
 			json.formated_date = @post.formated_date()
 			el = @el
-			console.log el
 			$.get @post.template(), (hbs) -> 
 				temp = Handlebars.compile(hbs)
 				html = temp(json)
-				$(el).append(html)
+				$(el).html(html)
+				offset = $(el).offset()
+				offset.bottom = offset.top + $(el).height()
+				post.set('offset', offset)
 
 	class BlogPost extends Backbone.Model
 		initialize: () ->
@@ -49,22 +48,34 @@ jQuery ->
 		formated_date: () ->
 			return moment(this.get('date')).format('MMMM DD, YYYY')
 
+		changeActive: (active) ->
+			el = @get('view').$el
+			if active
+				el.find('a#date').addClass('adjusted').addClass('active')
+			else
+				el.find('a#date').removeClass('adjusted').removeClass('active')
+
 	class BlogPosts extends Backbone.Collection
 		initialize: ->
 			this.on 'reset', (posts) ->
-				console.log('posts', posts)
+				el = $('section.blog-section')
+				el.empty()
 				_.each posts.models, (post) -> 
-					new BlogPostView({
-				      el: $('section.blog-section'),
+					el.append("<article id='"+post.id+"'></article>")
+					view = new BlogPostView
+				      el: el.find("article#"+post.id),
 				      model: post
-				    })
+					post.set('view', view)
 		model: BlogPost
 		url: ->
 			return '/blog.json'
 
+	# Set up in the window!
 	window.posts = new BlogPosts
-	params = 
+	window.blog_view = new BlogView
 		model: window.posts
 		el: $('section.blog-section')
 
-	window.blog_view = new BlogView params
+	# Setup other stuff
+	adjustSelection('home')
+	setupLinks()

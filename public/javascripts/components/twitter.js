@@ -1,5 +1,6 @@
 
 function setupTwitter(url, el) {
+  console.log(url, el)
   var href = el.href;
 
   if ($('#twitter-profile').length > 0) {

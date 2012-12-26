@@ -15,12 +15,12 @@ var allComponents = [
 function setupLinks() {
 
   $('a').click(function(e) {
-    console.log('link clicked', e)
+    console.log(this.href == $url)
       if (e.which == 2)
           return;
       e.preventDefault();
       e.stopPropagation();
-
+      console.log(this.href == $url)
       if (this.href == $url)
           return;
 
@@ -34,11 +34,13 @@ function setupLinks() {
          adjustSelection('instagram');
          setupInstagram(this);
       }
-      else if (twitter_integration_enabled && (url.attr('host') == 'twitter.com' || url.attr('host') == 'www.twitter.com')) {
+      else if (twitter_integration_enabled && this.id == 'twitter-link') {
+         console.log('twitter')
          adjustSelection('twitter');
          setupTwitter(url, this);
       }
-      else if (github_integration_enabled && (url.attr('host') == 'github.com' || url.attr('host') == 'www.github.com')) {
+      else if (github_integration_enabled && this.id == 'github-link') {
+        console.log('github', url)
         adjustSelection('github');
         setupGithub(url, this);
       }
@@ -67,6 +69,7 @@ function setupLinks() {
          setupTent(this);
       }
       else {
+          console.log('uh oh')
          window.location = this.href;
       }
       return false;
