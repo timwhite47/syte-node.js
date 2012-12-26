@@ -83,7 +83,6 @@ app.configure('development', function(){
 });
 
 app.get('/', function(req, res) {
-  console.log('config', c.config.integrations.foursquare)
   res.render('index', { syteSettings: app.get('syte_settings') });
 });
 

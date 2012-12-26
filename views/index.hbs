@@ -1,9 +1,17 @@
 <section class="main-section blog-section" id="blog-posts">
-  <span class="loading">loading blog posts ...</span>
+  <span class="loading">loading blog posts...</span>
 </section>
 <script type="text/javascript">
 
 var postOffset = 0;
+$(document).ready(function () {
+setTimeout(function() {
+  // window.BlogView({
+  //   model: window.BlogPosts, 
+  //   view: $('section.blog-section')
+  // })
+}, 1000);
+})
 $(function() {
   // TODO: Redo this in pure JS
   fetchBlogPosts(postOffset, "{{tag_slug}}");
@@ -16,16 +24,8 @@ $(function() {
 });
 
 var resultsLoaded = false;
-$(window).scroll(function() {
-  if(!resultsLoaded && ($(window).scrollTop() +
-    $(window).height() > $(document).height()/1.2)) {
-      resultsLoaded = true;
-      postOffset += 20;
-      fetchBlogPosts(postOffset, "{{tag_slug}}");
-  }
-  if(resultsLoaded && ($(window).scrollTop() + 
-    $(window).height() < $(document).height()/1.2)) {
-      resultsLoaded = false;
-  }
+$(window).scroll(function(event) {
+  var scrollTop = $(window).scrollTop();
+  console.log(scrollTop);
 });
 </script>

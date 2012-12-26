@@ -1,5 +1,6 @@
 
 function fetchBlogPosts(offset, tag) {
+  return false
   var blog_fetch_url = '/blog.json?o=' + offset;
   console.log('offset', offset)
   if (tag)
@@ -7,8 +8,8 @@ function fetchBlogPosts(offset, tag) {
 
   $.getJSON(blog_fetch_url, function(blog) {
        $('.loading').remove();
-         if (blog.response.posts) {
-          $.each(blog.response.posts, function(i, p) {
+         if (blog) {
+          $.each(blog, function(i, p) {
              console.log(p)
               p.formated_date = moment(p.date).format('MMMM DD, YYYY')
               // TODO: Put disqus back in.
@@ -60,7 +61,7 @@ function adjustBlogHeaders() {
 }
 
 function setupBlogHeaderScroll() {
-
+  console.log('setupBlogHeaderScroll()')
   if(isMobileView)
     return;
 

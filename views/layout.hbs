@@ -17,7 +17,18 @@
     <script src="/stylesheets/less-1.1.5.min.js" type="text/javascript"></script>
     <!-- <link rel="stylesheet" href="/stylesheets/styles-{{ COMPRESS_REVISION_NUMBER }}.min.css" type="text/css" media="screen, projection"> -->
   <!-- END TODO -->
-
+  <script src="/javascripts/libs/jquery.url.js"></script>
+  <script src="/javascripts/libs/coffee-script.js"></script>
+  <script type="text/javascript" src="/javascripts/libs/underscore-min.js"></script>
+  <script type="text/javascript" src="/javascripts/libs/backbone-min.js"></script>
+  <script type="text/coffeescript" src="/javascripts/syte/blog_posts.coffee"></script>
+  <script type="text/coffeescript" src="/javascripts/syte/blog_view.coffee"></script>
+  <script src="/javascripts/libs/require.js"></script>
+  <script src="/javascripts/libs/handlebars.js"></script>
+  <script src="/javascripts/libs/moment.min.js"></script>
+  <script src="/javascripts/libs/bootstrap-modal.js"></script>
+  <script src="/javascripts/libs/spin.min.js"></script>
+  <script src="/javascripts/libs/prettify.js"></script>
 </head>
 <body>
 <header class="main-header">
@@ -160,13 +171,6 @@ var disqus_shortname = '{{ syteSettings.integrations.disqus.shortName }}';
 </script>
 {{/if}}
 
-<script src="/javascripts/libs/jquery.url.js"></script>
-<script src="/javascripts/libs/require.js"></script>
-<script src="/javascripts/libs/handlebars.js"></script>
-<script src="/javascripts/libs/moment.min.js"></script>
-<script src="/javascripts/libs/bootstrap-modal.js"></script>
-<script src="/javascripts/libs/spin.min.js"></script>
-<script src="/javascripts/libs/prettify.js"></script>
 <script src="/javascripts/components/base.js"></script>
 <script src="/javascripts/components/mobile.js"></script>
 <script src="/javascripts/components/blog-posts.js"></script>

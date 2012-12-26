@@ -1,7 +1,7 @@
 var Tumblr = require('tumblr').Tumblr
   , Twitter = require('twitter')
   , GitHubApi = require("github")
-  , ig = require('instagram-node').instagram({});
+  , ig = require('instagram-node').instagram({})
   , cache = require('memory-cache')
   , cache_time = (60*(60*1000))
 
@@ -9,16 +9,22 @@ module.exports = function (app) {
 	app.get('/blog.json', function (req, res) {
 	  var blog_config = app.get('syte_settings').integrations.tumblr;
 	  console.log(blog_config);
-	  var offset = req.query.o;
+	  var offset;
+	  if (req.query.o) {
+	  	offset = req.query.o;
+	  } else {
+	  	offset = 0;
+	  }
 	  var cache_key = 'blog/'+offset.toString();
 
-	  if (cache.get(cache_key)) {
+	  if (false) {
 	  	res.json(cache.get(cache_key))
 	  } else {
 	  	var blog = new Tumblr(blog_config.blogUrl, blog_config.oauthCusumerKey);
 	  	blog.posts({limit: 20, offset:offset}, function(error, response) {
 	  	  // if (error) {throw new Error(error)};
-	  	  blog_resp = {response:response};
+	  	  console.log(response.posts);
+	  	  blog_resp = response.posts;
 	  	  cache.put(cache_key, blog_resp, cache_time);
 	  	  res.json(blog_resp);
 	  	});
