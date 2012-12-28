@@ -23,13 +23,12 @@
     <a href="https://foursquare.com/user/{{ id }}" class="btn">Follow on Foursquare</a>
   </div>
   {{/with}}
-  {{#with checkins}}
   <ul class="profile-checkins">
-    {{#each items}}
+    {{#each checkins}}
     <li>
       {{#with venue}}
         <a href="{{#if url }}{{url}}{{/if}}" class="checkin-title">
-          <img src="{{ venueImageURL }}" alt="{{ name }}" />
+          <img src="{{ venueImageURL }}" alt="{{ name }}" class='foursquare_category' />
           <strong>{{ name }}</strong>
           <span>{{ categoryName }}</span>
         </a>
@@ -41,5 +40,4 @@
     </li>
     {{/each }}
   </ul>
-  {{/with}}
 </div>

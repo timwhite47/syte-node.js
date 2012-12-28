@@ -35,7 +35,7 @@ everyauth.foursquare
     return c.config.integrations.foursquare.profile
   })
   .callbackPath('/auth/foursquare/callback')
-  .redirectPath
+  .redirectPath('/')
 
   everyauth.instagram
     .appId(c.config.integrations.instagram.client_id)

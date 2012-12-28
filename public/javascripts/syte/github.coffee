@@ -11,6 +11,8 @@ jQuery ->
 				$(el).modal().on 'hidden', () ->
 				    $(el).remove()
 				    adjustSelection('home')
+				
+				window.sidebar_spinner.stop()
 
 	class Github extends Backbone.Model
 		initialize: () ->

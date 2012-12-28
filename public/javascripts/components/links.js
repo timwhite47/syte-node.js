@@ -15,6 +15,8 @@ var allComponents = [
 function setupLinks() {
 
   $('a').click(function(e) {
+    window.sidebar_spinner = new Spinner(spin_opts).spin();
+    $(this).append(window.sidebar_spinner.el);
     console.log(this.href == $url)
       if (e.which == 2)
           return;
@@ -29,18 +31,16 @@ function setupLinks() {
 
       if (this.id == 'home-link' && window.location.pathname == '/') {
          adjustSelection('home');
+         window.sidebar_spinner.stop()
       }
       else if(this.id == 'instagram-link' && instagram_integration_enabled) {
-         adjustSelection('instagram');
-         setupInstagram(this);
+         window.InstagramData.fetch()
       }
       else if (twitter_integration_enabled && this.id == 'twitter-link') {
          window.Tweets.fetch();
       }
       else if (github_integration_enabled && this.id == 'github-link') {
-        console.log('github', url)
-        adjustSelection('github');
-        setupGithub(url, this);
+        window.GithubData.fetch()
       }
       else if (dribbble_integration_enabled && (url.attr('host') == 'dribbble.com' || url.attr('host') == 'www.dribbble.com')) {
          adjustSelection('dribbble');
@@ -59,8 +59,7 @@ function setupLinks() {
         setupBitbucket(url, this);
       }
       else if(this.id == 'foursquare-link' && foursquare_integration_enabled) {
-         adjustSelection('foursquare');
-         setupFoursquare(this);
+         window.FoursquareData.fetch()
       }
       else if(this.id == 'tent-link' && tent_integration_enabled) {
          adjustSelection('tent');

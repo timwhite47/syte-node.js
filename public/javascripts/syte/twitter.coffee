@@ -16,10 +16,11 @@ jQuery ->
 			$.get '/templates/twitter-view.html', (hbs) ->
 				template = Handlebars.compile(hbs)
 				el = template template_data
-				adjustSelection('twitter');
+				adjustSelection('twitter')
 				$(el).modal().on 'hidden', () ->
 				    $(el).remove()
 				    adjustSelection('home')
+				window.sidebar_spinner.stop()
 
 	class Tweet extends Backbone.Model
 		initialize: () ->
@@ -27,6 +28,7 @@ jQuery ->
 	class Tweets extends Backbone.Collection
 		initialize: () -> 
 			this.on 'reset', (tweets) ->
+				console.log tweets
 				view = new TwitterView
 			      el: @el,
 			      model: tweets
