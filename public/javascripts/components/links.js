@@ -35,9 +35,7 @@ function setupLinks() {
          setupInstagram(this);
       }
       else if (twitter_integration_enabled && this.id == 'twitter-link') {
-         console.log('twitter')
-         adjustSelection('twitter');
-         setupTwitter(url, this);
+         window.Tweets.fetch();
       }
       else if (github_integration_enabled && this.id == 'github-link') {
         console.log('github', url)

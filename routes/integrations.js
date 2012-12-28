@@ -17,7 +17,7 @@ module.exports = function (app) {
 	  }
 	  var cache_key = 'blog/'+offset.toString();
 
-	  if (false) {
+	  if (cache.get(cache_key)) {
 	  	res.json(cache.get(cache_key))
 	  } else {
 	  	var blog = new Tumblr(blog_config.blogUrl, blog_config.oauthCusumerKey);
@@ -35,7 +35,7 @@ module.exports = function (app) {
 	app.get('/tweets.json', function (req, res) {
 	  var cache_key = 'tweets'
 
-	  if (cache.get(cache_key)) {
+	  if (false) {
 	  	res.json(cache.get(cache_key))
 	  } else {
 	  	var twitter_config = app.get('syte_settings').integrations.twitter
@@ -43,7 +43,7 @@ module.exports = function (app) {
 	  	twit.get('/statuses/user_timeline.json', {screen_name:twitter_config.username}, function(data) {
 	  		tweets = {data: data};
 	  		cache.put(cache_key, tweets, cache_time);
-	  	    res.json(tweets);
+	  	    res.json(data);
 	  	});
 	  }
 

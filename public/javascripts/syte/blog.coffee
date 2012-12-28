@@ -3,7 +3,7 @@ jQuery ->
 		initialize: (opts) ->
 			@model.fetch()
 		render: ->
-			@model.posts.models[0]
+			# @model.posts.models[0]
 
 	class BlogPostView extends Backbone.View
 		tagName: "article"

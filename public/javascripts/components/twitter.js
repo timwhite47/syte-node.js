@@ -33,7 +33,7 @@ function setupTwitter(url, el) {
          var tweets = [];
          $.each(twitter_data, function(i, t) {
            t.formated_date = moment(t.created_at).fromNow();
-           t.f_text = twitterLinkify(t.text);
+           // t.f_text = twitterLinkify(t.text);
            tweets.push(t);
          });
 
@@ -41,7 +41,6 @@ function setupTwitter(url, el) {
          user.statuses_count = numberWithCommas(user.statuses_count);
          user.friends_count = numberWithCommas(user.friends_count);
          user.followers_count = numberWithCommas(user.followers_count);
-         user.f_description = twitterLinkify(user.description);
 
          var template_data = {
              "user": user,
@@ -49,7 +48,7 @@ function setupTwitter(url, el) {
          }
 
          $(template(template_data)).modal().on('hidden', function () {
-             $(this).remove();
+             $(this).hide();
              adjustSelection('home');
          })
 
