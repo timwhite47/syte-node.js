@@ -16,6 +16,7 @@
     "twitter" : "*",
     "github" : "*",
     "4sq" : "*",
-    "instagram-node" : "*"
+    "instagram-node" : "*",
+    "mongoose" : "*"
   }
 }

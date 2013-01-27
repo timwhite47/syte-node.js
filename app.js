@@ -26,38 +26,46 @@ everyauth.foursquare
   .findOrCreateUser( function (session, accessToken, accessTokExtra, metadata) {
     // find or create user logic goes here
     if (metadata.id == c.config.integrations.foursquare.uid) {
+      var foursquare_auth = {provider: 'foursquare', accessToken:accessToken, profile: metadata}
+      c.config.auth.findOneAndUpdate({provider: "foursquare"}, foursquare_auth, {upsert: true}, function (fs_auth) {
+        if(!fs_auth){
+          c.config.auth.create(foursquare_auth, function (e,c) {
+            console.log(e,c)
+          });
+        }
+      })
       c.config.integrations.foursquare.accessToken = accessToken;
       c.config.integrations.foursquare.profile = metadata;
     } else {
       // Theres a hacker a foot
     }
-
     return c.config.integrations.foursquare.profile
   })
   .callbackPath('/auth/foursquare/callback')
   .redirectPath('/')
 
-  everyauth.instagram
-    .appId(c.config.integrations.instagram.client_id)
-    .appSecret(c.config.integrations.instagram.client_secret)
-    .getSession(function (argument) {
-      console.log(argument);
-      return {}
-    })
-    .findOrCreateUser( function (session, accessToken, accessTokenExtra, profile) {
-      if (c.config.integrations.instagram.uid == profile.id) {
-        c.config.integrations.instagram.accessToken = accessToken;
-        c.config.integrations.instagram.profile = profile;
-        console.log(accessToken, accessTokenExtra, profile);
-      };
-      setTimeout(function() {
-        console.log('new instagram auth', c.config.integrations.instagram)
-      }, 2000);
-
-      return c.config.integrations.instagram.profile
-    })
-    .scope('basic')
-    .redirectPath('/');
+everyauth.instagram
+  .appId(c.config.integrations.instagram.client_id)
+  .appSecret(c.config.integrations.instagram.client_secret)
+  .getSession(function (argument) {return {}})
+  .findOrCreateUser( function (session, accessToken, accessTokenExtra, profile) {
+    if (c.config.integrations.instagram.uid == profile.id) {
+      var instagram_auth = {provider: 'instagram', accessToken:accessToken, profile:profile}
+      c.config.auth.findOneAndUpdate({provider: "instagram"}, instagram_auth, {upsert: true}, function (ig_auth) {
+        if(!ig_auth){
+          c.config.auth.create(instagram_auth, function (e,c) {
+            console.log(e,c)
+          });
+        }
+      })
+      
+      return profile
+    } else {
+      // theres a hacker afoot
+    }
+  })
+  .scope('basic')
+  .redirectPath('/');
 
 everyauth.everymodule.findUserById( function (userId, callback) {
   // Something should go here....
