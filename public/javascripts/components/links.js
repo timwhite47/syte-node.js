@@ -17,21 +17,20 @@ function setupLinks() {
   $('a').click(function(e) {
     window.sidebar_spinner = new Spinner(spin_opts).spin();
     $(this).append(window.sidebar_spinner.el);
-    console.log(this.href == $url)
       if (e.which == 2)
           return;
       e.preventDefault();
       e.stopPropagation();
-      console.log(this.href == $url)
       if (this.href == $url)
           return;
 
       var url = $.url(this.href.replace('/#!', ''));
       $url = this.href;
-
-      if (this.id == 'home-link' && window.location.pathname == '/') {
+      console.log(this.id == 'home-link')
+      if (this.id == 'home-link') {
          adjustSelection('home');
-         window.posts.fetch();
+         $('section.blog-section').data('post-id', null)
+         window.blogRoutes.navigate('', {trigger: true})
          window.sidebar_spinner.stop()
       }
       else if(this.id == 'instagram-link' && instagram_integration_enabled) {
@@ -68,7 +67,6 @@ function setupLinks() {
       }
       else {
           console.log('uh oh')
-         window.location = this.href;
          window.sidebar_spinner.stop()
       }
       return false;

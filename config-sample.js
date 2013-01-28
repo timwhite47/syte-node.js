@@ -25,6 +25,7 @@ config.name =  "John Doe";
 // Frontend Sidebar
 config.sidebarBlurb = "This is your syte!";
 config.syteTitle = 'Syte for Node JS';
+config.baseUrl = "http://www.your-domain-name.com"
 config.hostName = "your-domain-name.com";
 
 // RSS

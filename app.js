@@ -98,7 +98,7 @@ app.get('/', function(req, res) {
     type: 'website',
     url: settings.hostName+req.url,
     image: settings.hostName+'/images/pic.png',
-    description: settings.sidebarBlurb
+    description: settings.baseUrl
   }
   res.render('index', { syteSettings: settings, og_data: og_data});
 });
@@ -110,9 +110,10 @@ app.get('/post/:post_id', function (req, res) {
     type: 'website',
     url: settings.hostName+req.url,
     image: settings.hostName+'/images/pic.png',
-    description: settings.sidebarBlurb
+    description: settings.baseUrl
   }
-  res.render('index', { syteSettings: settings, og_data: og_data });
+  console.log('req.query.post_id', req.params.post_id)
+  res.render('index', { syteSettings: settings, og_data: og_data, post_id: req.params.post_id });
 })
 
 http.createServer(app).listen(app.get('port'), function(){

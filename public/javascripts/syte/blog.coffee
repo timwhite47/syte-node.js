@@ -56,18 +56,24 @@ jQuery ->
 		initialize: ->
 			this.on 'reset', (posts) ->
 				_this = this
-				$('section.blog-section').empty()
-				_.each posts.models, (post) -> 
-					_this.renderPost(post)
+				el = $('section.blog-section')
+				el.empty()
+				if el.data('post-id')
+					_this.renderPost(posts.get(el.data('post-id')))
+				else
+					_.each posts.models, (post) -> 
+						_this.renderPost(post)
+				
 
 		model: BlogPost
 		renderPost: (post) ->
 			el = $('section.blog-section')
-			el.append("<article id='"+post.id+"'></article>")
-			view = new BlogPostView
-		      el: el.find("article#"+post.id),
-		      model: post
-			post.set('view', view)
+			if post
+				el.append("<article id='"+post.id+"'></article>")
+				view = new BlogPostView
+			      el: el.find("article#"+post.id),
+			      model: post
+				post.set('view', view)
 
 		url: ->
 			return '/blog.json'
