@@ -36,6 +36,14 @@
   <script type="text/coffeescript" src="/javascripts/syte/github.coffee"></script>
   <script type="text/coffeescript" src="/javascripts/syte/foursquare.coffee"></script>
   <script type="text/coffeescript" src="/javascripts/syte/instagram.coffee"></script>
+  <script type="text/coffeescript" src="/javascripts/syte/blog_routes.coffee"></script>
+  {{#if og_data }}
+  <meta property="og:title" content="{{og_data.title}}" />
+  <meta property="og:type" content="{{og_data.type}}" />
+  <meta property="og:description" content="{{og_data.description}}"/>
+  <meta property="og:url" content="{{og_data.url}}" />
+  <meta property="og:image" content="{{og_data.image}}" />
+  {{/if}}
 </head>
 <body>
 <header class="main-header">
@@ -93,6 +101,7 @@
   </nav>
   <a href="https://github.com/timwhite47/syte" class="fork-me">Fork me on Github</a>
 </header>
+  
 
 {{{body}}}
 

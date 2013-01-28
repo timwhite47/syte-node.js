@@ -91,8 +91,27 @@ app.configure('development', function(){
 });
 
 app.get('/', function(req, res) {
-  res.render('index', { syteSettings: app.get('syte_settings') });
+  console.log('url got', req.originalUrl)
+  var settings = app.get('syte_settings')
+  var og_data = {
+    title: settings.syteTitle, 
+    type: 'website',
+    url: settings.hostName+req.url,
+    image: settings.hostName+'/images/pic.png'
+  }
+  res.render('index', { syteSettings: settings, og_data: og_data});
 });
+
+app.get('/post/:post_id', function (req, res) {
+  var settings = app.get('syte_settings')
+  var og_data = {
+    title: settings.syteTitle, 
+    type: 'website',
+    url: settings.hostName+req.url,
+    image: settings.hostName+'/images/pic.png'
+  }
+  res.render('index', { syteSettings: settings, og_data: og_data });
+})
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));

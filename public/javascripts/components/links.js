@@ -31,6 +31,7 @@ function setupLinks() {
 
       if (this.id == 'home-link' && window.location.pathname == '/') {
          adjustSelection('home');
+         window.posts.fetch();
          window.sidebar_spinner.stop()
       }
       else if(this.id == 'instagram-link' && instagram_integration_enabled) {
@@ -68,6 +69,7 @@ function setupLinks() {
       else {
           console.log('uh oh')
          window.location = this.href;
+         window.sidebar_spinner.stop()
       }
       return false;
   });

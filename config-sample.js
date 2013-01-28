@@ -1,10 +1,5 @@
 var mongoose = require('mongoose');
-console.log('env variables!!!', process.env.NODE_ENV, process.env.MONGOHQ_URL)
-if (process.env.NODE_ENV == 'production') {
-  var mongo = mongoose.createConnection('linus.mongohq.com', 'app10339562', 10067, {user: 'tenacioustimi', pass: process.env.MONGO_PWD })
-} else {
-  var mongo = mongoose.createConnection('localhost', 'test')
-};
+var mongo = mongoose.createConnection('localhost', 'test')
 
 mongo.on('error', console.error.bind(console, 'connection error:'));
 mongo.once('open', function () {console.log('Mongo Open!!!')});
@@ -24,18 +19,18 @@ config.seo = {};
 config.integrations = {};
 
 // Basic Info
-config.email = "tim@tenacioustimi.com";
-config.name =  "Tim White";
+config.email = "your_email@somewhere.com";
+config.name =  "John Doe";
 
 // Frontend Sidebar
-config.sidebarBlurb = "Web Developer. Node JS and Ruby/Rails lover. Nerd at Heart ";
-config.syteTitle = 'tenacioustimi';
-config.hostName = "tenacioustimi.com";
+config.sidebarBlurb = "This is your syte!";
+config.syteTitle = 'Syte for Node JS';
+config.hostName = "your-domain-name.com";
 
 // RSS
 config.rss = {
   enabled: false,
-  feedUrl: "RSS_FEED_URL"
+  feedUrl: "FOOBAR_RSS_FEED_URL"
 };
 
 
@@ -44,12 +39,12 @@ config.rss = {
 // Twitter
 config.integrations.twitter = {
   enabled: true,
-  username: "tenacioustimi",
+  username: "twitter_handle",
   oauth: {
-    consumer_key: 'HDEJiTYhOkNjC1S7JFE2g',
-    consumer_secret: 'R7Vf9gFgisyTjnsfIygflPPJEk8HcNFjJqFUE24BLs',
-    access_token_key: '17106780-iPiFkGkgbV3vqvZkTo1b2mzsxEIjvnNPvyfL6uBDk',
-    access_token_secret: 'cOnO72ArXnrobVtYplndvzllkMlcA6h89a38BQTA'
+    consumer_key: 'consumer_key',
+    consumer_secret: 'consumer_secret',
+    access_token_key: 'access_token_key',
+    access_token_secret: 'access_token_secret'
   }
 };
 
@@ -62,33 +57,33 @@ config.integrations.disqus = {
 // Tumblr
 config.integrations.tumblr = {
   enabled: true,
-  username: 'tenacioustimi',
-  blogUrl: 'tenacioustimi.tumblr.com',
-  oauthCusumerKey: "CJ9gY3DKKAV0xmSxnBZPzKrUygY1ESecxsU7uuGNKBsZpZ26Ya"
+  username: 'tumblr_username',
+  blogUrl: 'blog.tumblr.com',
+  oauthCusumerKey: "oauth_key"
 };
 
 // Github
 config.integrations.github = {
   enabled: true,
-  username: 'timwhite47'
+  username: 'github_username'
 }
 
 // Instagram - TODO
 config.integrations.instagram = {
   enabled: true,
-  username: 'tenacioustimi',
-  uid: '27657730',
-  client_id: "b67a71a81a754cc29aeb5ee716105b50", 
-  client_secret: "05713e446cd44c97a9467cfbb2757c28"
+  username: 'ig_username',
+  uid: 'ig_uid',
+  client_id: "client_id", 
+  client_secret: "client_secret"
 }
 
 // Foursquare
 config.integrations.foursquare = {
   enabled: true,
-  username: "tenacioustimi",
-  uid: '8760932',
-  client_id: "X0JLKJTNGHEN4BVFDOYPBQEJMQYVWZPCSBJSZJ3ZE14IAVLO", 
-  client_secret: "EPPIR0ITAHPZUDCRFFCDEK1XAVNEUQW1LJ0ZBH5BMAHIDRR5"
+  username: "fs_username",
+  uid: 'fs_uid',
+  client_id: "client_id", 
+  client_secret: "client_secret"
 };
 
 // Last FM - TODO
@@ -131,8 +126,8 @@ config.analytics.googleAnalytics = {
   trackingId: "GOOGLE_ANALYTICS_TRACKING_ID" 
 }
 
-config.seo.description =  "Tim White's place on the interwebs";
-config.seo.keywords = ['Tim', 'White', 'Bellingham', 'WA', 'Web Development', 'programming', 'ruby', 'node.js', 'hacker'].join();
+config.seo.description =  "This is a syte site in Node.js";
+config.seo.keywords = ['these', 'are', 'your', 'keywords'].join();
 
 config.auth = auth
 

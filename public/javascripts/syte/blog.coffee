@@ -21,9 +21,6 @@ jQuery ->
 				temp = Handlebars.compile(hbs)
 				html = temp(json)
 				$(el).html(html)
-				offset = $(el).offset()
-				offset.bottom = offset.top + $(el).height()
-				post.set('offset', offset)
 
 	class BlogPost extends Backbone.Model
 		initialize: () ->
@@ -58,15 +55,20 @@ jQuery ->
 	class BlogPosts extends Backbone.Collection
 		initialize: ->
 			this.on 'reset', (posts) ->
-				el = $('section.blog-section')
-				el.empty()
+				_this = this
+				$('section.blog-section').empty()
 				_.each posts.models, (post) -> 
-					el.append("<article id='"+post.id+"'></article>")
-					view = new BlogPostView
-				      el: el.find("article#"+post.id),
-				      model: post
-					post.set('view', view)
+					_this.renderPost(post)
+
 		model: BlogPost
+		renderPost: (post) ->
+			el = $('section.blog-section')
+			el.append("<article id='"+post.id+"'></article>")
+			view = new BlogPostView
+		      el: el.find("article#"+post.id),
+		      model: post
+			post.set('view', view)
+
 		url: ->
 			return '/blog.json'
 

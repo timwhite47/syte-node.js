@@ -6,7 +6,6 @@ jQuery ->
 			$.get '/templates/github-profile.html', (hbs) ->
 				template = Handlebars.compile(hbs)
 				el = template template_data 
-				console.log el
 				adjustSelection('github')
 				$(el).modal().on 'hidden', () ->
 				    $(el).remove()
@@ -19,9 +18,7 @@ jQuery ->
 
 	class GithubData extends Backbone.Collection
 		initialize: () -> 
-			console.log 'setting up github'
 			this.on 'reset', (data) ->
-				console.log 'github data'
 				view = new GithubView
 			      el: @el,
 			      model: data
