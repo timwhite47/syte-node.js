@@ -97,7 +97,8 @@ app.get('/', function(req, res) {
     title: settings.syteTitle, 
     type: 'website',
     url: settings.hostName+req.url,
-    image: settings.hostName+'/images/pic.png'
+    image: settings.hostName+'/images/pic.png',
+    description: settings.sidebarBlurb
   }
   res.render('index', { syteSettings: settings, og_data: og_data});
 });
@@ -108,7 +109,8 @@ app.get('/post/:post_id', function (req, res) {
     title: settings.syteTitle, 
     type: 'website',
     url: settings.hostName+req.url,
-    image: settings.hostName+'/images/pic.png'
+    image: settings.hostName+'/images/pic.png',
+    description: settings.sidebarBlurb
   }
   res.render('index', { syteSettings: settings, og_data: og_data });
 })
